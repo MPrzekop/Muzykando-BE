@@ -17,7 +17,7 @@ admin-dev/autoupgrade/
 !/cache/sandbox/index.php
 !/cache/smarty/index.php
 !/cache/tcpdf/index.php
-config/xml/*.xml
+#config/xml/*.xml
 /log/*
 *sitemap.xml
 themes/*/cache/
