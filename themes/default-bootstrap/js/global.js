@@ -26,7 +26,7 @@
 var responsiveflag = false;
 
 $(document).ready(function () {
-    console.log("zauadowane");
+    
 	highdpiInit();
 	responsiveResize();
 	$(window).resize(responsiveResize);
@@ -74,11 +74,12 @@ $(document).ready(function () {
     $('#center_column').mouseenter(function () {
         _initial = new Date();
         _initial = _initial.setDate(_initial.getDate());
-        console.log("loglog");
+        //console.log("loglog");
     }).mouseleave(function () {
         _final = new Date();
         _final = _final.setDate(_final.getDate());
-        console.log(((_final- _initial) / 1000));
+        //console.log(((_final- _initial) / 1000));
+        ga('send', 'timing', 'product info', 'hover', ((_final - _initial) / 1000));
     });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
