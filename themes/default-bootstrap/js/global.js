@@ -75,6 +75,7 @@ $(document).ready(function(){
 			location.href = this.value;
 	});
 
+    var _initial = new Date(), _final = new Date();
     $('.product-container').mouseenter(function () {
         _initial = new Date();
         _initial = _initial.setDate(_initial.getDate());
@@ -84,9 +85,13 @@ $(document).ready(function(){
         var name = $(this).find(".product-name").text().trim();
         var delta = (_final - _initial);
         if (delta > 500) {
-            ga('send', 'timing', 'product in list', 'hover', delta, name);
+            ga('send', 'timing', 'produkt w liœcie', 'najechanie mysz¹', delta, name);
         }
     });
+    $('.homeslider-container a').click(function () {
+        console.log("klik");
+        ga('send', 'event', 'Slider', 'klikniêcie');
+    })
 	$(document).on('click', '.back', function(e){
 		e.preventDefault();
 		history.back();
