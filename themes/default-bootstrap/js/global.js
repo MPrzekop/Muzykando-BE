@@ -80,17 +80,14 @@ $(document).ready(function () {
         var name = $(this).find(".product-name").text().trim();
         var delta = (_final - _initial);
         if (delta > 500) {
-            ga('send', 'timing', 'product in list', 'hover', delta, name);
+            ga('send', 'timing', 'produkt w liœcie', 'najechanie mysz¹', delta, name);
         }
         });
     $('.homeslider-container a').click(function () {
         console.log("klik");
-        ga('send', 'event', 'Slider', 'click');
+        ga('send', 'event', 'Slider', 'klikniêcie');
     })
-    $(document).on('click', '.homeslider-container a', function() {
-        console.log("klik");
-        ga('send', 'event', 'Slider', 'click');
-    })
+    
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
 			location.href = this.value;
