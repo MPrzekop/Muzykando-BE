@@ -38,7 +38,7 @@ var ajaxCart = {
 			var idProduct =  $(this).attr('rel').replace('nofollow', '').replace('ajax_id_product_', '');
             if ($(this).attr('disabled') != 'disabled') {
                 ga('send', 'timing', 'test', 'testVar', 100);
-                Console.log("timing");
+                console.log("timing");
                 ajaxCart.add(idProduct, null, false, this);
 		        
 		        ga('send', 'event', 'Add to cart', 'product added to cart', 'cart', 1);
