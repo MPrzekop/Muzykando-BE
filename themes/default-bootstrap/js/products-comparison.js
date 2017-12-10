@@ -77,6 +77,7 @@ function addToCompare(productId)
 					alert(max_item);
 			}
 			totalCompareButtons();
+			ga('send', 'event', 'comparasion', 'add', productId, 10, 42);
 		},
 		error: function(){}
 	});
