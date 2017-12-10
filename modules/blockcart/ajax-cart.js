@@ -37,15 +37,15 @@ var ajaxCart = {
 		$('.ajax_add_to_cart_button').unbind('click').click(function(){
 			var idProduct =  $(this).attr('rel').replace('nofollow', '').replace('ajax_id_product_', '');
 		    if ($(this).attr('disabled') != 'disabled') {
-		        ajaxCart.add(idProduct, null, false, this);
-		        _gaq.push(['_trackEvent', 'cart', 'Add to cart', 'product added to cart']);
+                ajaxCart.add(idProduct, null, false, this);
+		        ga('send', 'event', 'Add to cart', 'product added to cart', 'cart', 1);
 		    }
 		    return false;
 		});
 		//for product page 'add' button...
 		$('#add_to_cart input').unbind('click').click(function(){
             ajaxCart.add($('#product_page_product_id').val(), $('#idCombination').val(), true, null, $('#quantity_wanted').val(), null);
-		    _gaq.push(['_trackEvent', 'cart', 'Add to cart', 'product added to cart']);
+		    ga('send', 'event', 'Add to cart', 'product added to cart', 'cart', 1);
 			return false;
 		});
 
