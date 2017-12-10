@@ -78,7 +78,10 @@ $(document).ready(function () {
         _final = new Date();
         _final = _final.setDate(_final.getDate());
         var name = $(this).find(".product-name").text().trim();
-        ga('send', 'timing', 'product in list', 'hover', (_final - _initial), name);
+        var delta = (_final - _initial);
+        if (delta > 500) {
+            ga('send', 'timing', 'product in list', 'hover', delta, name);
+        }
     });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
