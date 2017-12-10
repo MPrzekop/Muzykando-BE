@@ -37,11 +37,10 @@ var ajaxCart = {
 		$('.ajax_add_to_cart_button').unbind('click').click(function(){
 			var idProduct =  $(this).attr('rel').replace('nofollow', '').replace('ajax_id_product_', '');
             if ($(this).attr('disabled') != 'disabled') {
-                ga('send', 'timing', 'test', 'testVar', 100);
-                console.log("timing");
+                
                 ajaxCart.add(idProduct, null, false, this);
 		        
-		        ga('send', 'event', 'Add to cart', 'product added to cart', 'cart', 1);
+		       
 		    }
 		    return false;
 		});
