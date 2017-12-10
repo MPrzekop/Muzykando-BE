@@ -77,7 +77,7 @@ $(document).ready(function () {
         }).mouseleave(function () {
         _final = new Date();
         _final = _final.setDate(_final.getDate());
-        var name = $(this).find(".product-name").innerHTML;
+        var name = $(this).find(".product-name").text();
         ga('send', 'timing', 'product in list', 'hover', (_final - _initial), name);
     });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
