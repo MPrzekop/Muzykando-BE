@@ -145,13 +145,7 @@ var GoogleAnalyticEnhancedECommerce = {
 			list: Product.list
 		});
 
-		ga('send', 'event', 'Produkt', 'Klikniêcie', Product.list, {
-			'nonInteraction': 1,
-			'hitCallback': function() {
-				return !ga.loaded;
-			}
-		});
-
+	    ga('send', 'event', 'Produkt', 'Klikniêcie', Product.name);
 	},
 
 	addTransaction: function(Order) {
