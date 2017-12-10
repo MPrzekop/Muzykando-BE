@@ -25,7 +25,8 @@
 //global variables
 var responsiveflag = false;
 
-$(document).ready(function(){
+$(document).ready(function () {
+    console.log("zauadowane");
 	highdpiInit();
 	responsiveResize();
 	$(window).resize(responsiveResize);
