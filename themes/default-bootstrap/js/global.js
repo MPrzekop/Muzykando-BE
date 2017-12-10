@@ -71,7 +71,7 @@ $(document).ready(function () {
 		});
 	}
     var _initial = new Date(), _final = new Date();
-    $('#primary_block row').mouseenter(function () {
+    $('#center_column').mouseenter(function () {
 
         _initial = _initial.setDate(_initial.getDate());
         console.log("loglog");
