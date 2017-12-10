@@ -77,7 +77,7 @@ $(document).ready(function () {
         console.log("loglog");
     }).mouseleave(function () {
         _final = new Date();
-        _final = _final.setDate(_initial.getDate());
+        _final = _final.setDate(_final.getDate());
         console.log(((endDate.getTime() - startDate.getTime()) / 1000));
     });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
