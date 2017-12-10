@@ -73,6 +73,7 @@ $(document).ready(function(){
     $('#primary_block row').mouseenter(function () {
 
         _initial = _initial.setDate(_initial.getDate());
+        console.log("loglog");
     }).mouseleave(function () {
 
         _final = _final.setDate(_initial.getDate());
