@@ -90,7 +90,7 @@ $(document).ready(function(){
     });
     $('.homeslider-container a').click(function () {
         console.log("klik");
-        ga('send', 'event', 'Slider', 'klikniêcie');
+        ga('send', 'event', 'Slider', 'klikniêcie ',$(this).attr('title'));
     })
 	$(document).on('click', '.back', function(e){
 		e.preventDefault();
