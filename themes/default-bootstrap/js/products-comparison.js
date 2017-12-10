@@ -47,8 +47,8 @@ function addToCompare(productId)
 		url: baseUri + '?controller=products-comparison&ajax=1&action=' + action + '&id_product=' + productId,
 		async: true,
 		cache: false,
-		success: function(data) {
-			if (action === 'add' && comparedProductsIds.length < comparator_max_item) {
+        success: function (data) {
+            if (action === 'add' && comparedProductsIds.length < comparator_max_item) {
 				comparedProductsIds.push(parseInt(productId)),
 				compareButtonsStatusRefresh(),
 				totalVal = totalValueNow +1,

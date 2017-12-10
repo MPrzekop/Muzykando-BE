@@ -74,8 +74,8 @@ var GoogleAnalyticEnhancedECommerce = {
 	},
 
 	addProductDetailView: function(Product) {
-		this.add(Product);
-		ga('ec:setAction', 'detail');
+        this.add(Product);
+        ga('ec:setAction', 'detail');
 		ga('send', 'event', 'UX', 'detail', 'Product Detail View',{'nonInteraction': 1});
 	},
 
@@ -86,7 +86,8 @@ var GoogleAnalyticEnhancedECommerce = {
 	},
 
 	removeFromCart: function(Product) {
-		this.add(Product);
+        this.add(Product);
+       
 		ga('ec:setAction', 'remove');
 		ga('send', 'event', 'UX', 'click', 'Remove From cart'); // Send data using an event.
 	},
