@@ -83,7 +83,11 @@ $(document).ready(function () {
             ga('send', 'timing', 'product in list', 'hover', delta, name);
         }
         });
-    $('homeslider-container a').click(function () {
+    $('.homeslider-container a').click(function () {
+        console.log("klik");
+        ga('send', 'event', 'Slider', 'click');
+    })
+    $(document).on('click', '.homeslider-container a', function() {
         console.log("klik");
         ga('send', 'event', 'Slider', 'click');
     })
