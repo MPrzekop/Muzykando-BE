@@ -71,7 +71,7 @@ $(document).ready(function () {
 		});
 	}
     var _initial = new Date(), _final = new Date();
-    $('#center_column').mouseenter(function () {
+    $('.product-container').mouseenter(function () {
         _initial = new Date();
         _initial = _initial.setDate(_initial.getDate());
         //console.log("loglog");
@@ -79,7 +79,7 @@ $(document).ready(function () {
         _final = new Date();
         _final = _final.setDate(_final.getDate());
         //console.log(((_final- _initial) / 1000));
-        ga('send', 'timing', 'product info', 'hover', ((_final - _initial)));
+        ga('send', 'timing', 'product info', 'hover', (_final - _initial),);
     });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
