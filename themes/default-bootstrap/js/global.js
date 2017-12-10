@@ -75,6 +75,18 @@ $(document).ready(function(){
 			location.href = this.value;
 	});
 
+    $('.product-container').mouseenter(function () {
+        _initial = new Date();
+        _initial = _initial.setDate(_initial.getDate());
+    }).mouseleave(function () {
+        _final = new Date();
+        _final = _final.setDate(_final.getDate());
+        var name = $(this).find(".product-name").text().trim();
+        var delta = (_final - _initial);
+        if (delta > 500) {
+            ga('send', 'timing', 'product in list', 'hover', delta, name);
+        }
+    });
 	$(document).on('click', '.back', function(e){
 		e.preventDefault();
 		history.back();
