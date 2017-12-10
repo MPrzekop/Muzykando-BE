@@ -82,7 +82,10 @@ $(document).ready(function () {
         if (delta > 500) {
             ga('send', 'timing', 'product in list', 'hover', delta, name);
         }
-    });
+        });
+    $('homeslider-container a').click(function() {
+        ga('send', 'event', 'Slider', 'click');
+    })
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
 			location.href = this.value;
