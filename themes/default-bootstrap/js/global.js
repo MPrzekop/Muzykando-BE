@@ -69,7 +69,15 @@ $(document).ready(function(){
 			setCurrency($(this).val());
 		});
 	}
+    var _initial = new Date(), _final = new Date();
+    $('#primary_block row').mouseenter(function () {
 
+        _initial = _initial.setDate(_initial.getDate());
+    }).mouseleave(function () {
+
+        _final = _final.setDate(_initial.getDate());
+        console.log(((endDate.getTime() - startDate.getTime()) / 1000));
+    });
 	$(document).on('change', 'select[name="manufacturer_list"], select[name="supplier_list"]', function(){
 		if (this.value != '')
 			location.href = this.value;
@@ -208,6 +216,7 @@ function blockHover(status)
 		}
 	});
 }
+
 
 function quick_view()
 {
