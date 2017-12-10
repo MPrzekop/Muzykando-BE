@@ -72,11 +72,11 @@ $(document).ready(function () {
 	}
     var _initial = new Date(), _final = new Date();
     $('#center_column').mouseenter(function () {
-
+        _initial = new Date();
         _initial = _initial.setDate(_initial.getDate());
         console.log("loglog");
     }).mouseleave(function () {
-
+        _final = new Date();
         _final = _final.setDate(_initial.getDate());
         console.log(((endDate.getTime() - startDate.getTime()) / 1000));
     });
