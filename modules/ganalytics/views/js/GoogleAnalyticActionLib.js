@@ -76,20 +76,20 @@ var GoogleAnalyticEnhancedECommerce = {
 	addProductDetailView: function(Product) {
         this.add(Product);
         ga('ec:setAction', 'detail');
-		ga('send', 'event', 'Product', 'detail', 'Product Detail View',{'nonInteraction': 1});
+		ga('send', 'event', 'Produkt', 'Wyœwietl szczegó³y', 'Widok szczegó³y produktu' + Product.name,{'nonInteraction': 1});
 	},
 
 	addToCart: function(Product) {
 		this.add(Product);
 		ga('ec:setAction', 'add');
-		ga('send', 'event', 'Cart', 'add', 'Add to Cart'); // Send data using an event.
+		ga('send', 'event', 'Koszyk', 'Dodaj produkt', 'Dodano produkt ' + Product.name + '  do koszyka'); // Send data using an event.
 	},
 
 	removeFromCart: function(Product) {
         this.add(Product);
        
 		ga('ec:setAction', 'remove');
-		ga('send', 'event', 'Cart', 'remove', 'Remove From cart'); // Send data using an event.
+		ga('send', 'event', 'Koszyk', 'Usuñ produkt', 'Usuniêto produkt ' + Product.name + ' z koszyka'); // Send data using an event.
 	},
 
 	addProductImpression: function(Product) {
@@ -145,7 +145,7 @@ var GoogleAnalyticEnhancedECommerce = {
 			list: Product.list
 		});
 
-		ga('send', 'event', 'Product Click', 'click', Product.list, {
+		ga('send', 'event', 'Produkt', 'Klikniêcie', Product.list, {
 			'nonInteraction': 1,
 			'hitCallback': function() {
 				return !ga.loaded;
