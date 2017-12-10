@@ -76,20 +76,20 @@ var GoogleAnalyticEnhancedECommerce = {
 	addProductDetailView: function(Product) {
         this.add(Product);
         ga('ec:setAction', 'detail');
-		ga('send', 'event', 'UX', 'detail', 'Product Detail View',{'nonInteraction': 1});
+		ga('send', 'event', 'Product', 'detail', 'Product Detail View',{'nonInteraction': 1});
 	},
 
 	addToCart: function(Product) {
 		this.add(Product);
 		ga('ec:setAction', 'add');
-		ga('send', 'event', 'UX', 'click', 'Add to Cart'); // Send data using an event.
+		ga('send', 'event', 'Cart', 'add', 'Add to Cart'); // Send data using an event.
 	},
 
 	removeFromCart: function(Product) {
         this.add(Product);
        
 		ga('ec:setAction', 'remove');
-		ga('send', 'event', 'UX', 'click', 'Remove From cart'); // Send data using an event.
+		ga('send', 'event', 'Cart', 'remove', 'Remove From cart'); // Send data using an event.
 	},
 
 	addProductImpression: function(Product) {
