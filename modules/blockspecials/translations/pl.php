@@ -2,7 +2,6 @@
 
 global $_MODULE;
 $_MODULE = array();
-
 $_MODULE['<{blockspecials}prestashop>blockspecials_c19ed4ea98cbf319735f6d09bde6c757'] = 'Blok promocji';
 $_MODULE['<{blockspecials}prestashop>blockspecials_f5bae06098deb9298cb9ceca89171944'] = 'Dodaje blok wyświetlający aktualnie przecenione produkty.';
 $_MODULE['<{blockspecials}prestashop>blockspecials_c888438d14855d7d96a2724ee9c306bd'] = 'Zaktualizowano ustawienia';
@@ -21,7 +20,3 @@ $_MODULE['<{blockspecials}prestashop>blockspecials_d1aa22a3126f04664e0fe3f598994
 $_MODULE['<{blockspecials}prestashop>blockspecials_b4f95c1ea534936cc60c6368c225f480'] = 'Wszystkie promocje';
 $_MODULE['<{blockspecials}prestashop>blockspecials_3c9f5a6dc6585f75042bd4242c020081'] = 'Aktualnie brak promocji.';
 $_MODULE['<{blockspecials}prestashop>tab_d1aa22a3126f04664e0fe3f598994014'] = 'Promocje';
-$_MODULE['<{blockspecials}prestashop>blockspecials_e420850bc0f6c94eff7edb2041b206bd'] = 'Brak promowanych produktów w tym momencie.';
-
-
-return $_MODULE;
