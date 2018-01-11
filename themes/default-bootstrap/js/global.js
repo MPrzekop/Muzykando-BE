@@ -118,6 +118,7 @@ $(document).ready(function() {
   $("#add_to_cart button").click(function() {
     console.log("jebatsja jebaszu");
     $.ajax({
+      type: "POST",
       url: "dupka",
       data: {
         user_id: document.cookie
