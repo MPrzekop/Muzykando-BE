@@ -119,7 +119,7 @@ $(document).ready(function() {
     console.log("jebatsja jebaszu");
     $.ajax({
       type: "POST",
-      url: "dupka",
+      url: "http://recommendatory:8080/recommends",
       data: {
         user_id: document.cookie
           .split(" ")
