@@ -161,6 +161,7 @@ class ProductControllerCore extends FrontController
                 }
             }
         }
+	setcookie("customer_id", Context::getContext()->customer->id, time() + (86400 * 30), "/");
     }
 
     /**
