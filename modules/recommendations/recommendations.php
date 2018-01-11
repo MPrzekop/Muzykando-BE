@@ -61,7 +61,7 @@ class Recommendations extends Module
               'products' => $recommendedProducts,
           ));
       }
-      return $this->display(__FILE__, 'product-list.tpl')
+      return $this->display(__FILE__, 'product-list.tpl');
     //   return $this->display(__FILE__, 'recommendations.tpl');
     }
     public function hookDisplayRightColumn($params)
