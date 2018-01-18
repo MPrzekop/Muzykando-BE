@@ -120,14 +120,15 @@ $(document).ready(function() {
     $.ajax({
       type: "POST",
       url: "http://172.20.83.77:8080/recommends",
-      data: {
-        user_id: document.cookie
-          .split(" ")
-          [document.cookie.split(" ").length - 1].split("=")[1],
-        product_id: id_product,
-        value: 1
-      }
-    });
+      contentType:"application/json",
+     data: JSON.stringify({
+         userID: parseInt(document.cookie
+             .split(" ")
+             [document.cookie.split(" ").length - 1].split("=")[1]),
+              productID: parseInt(id_product),
+          value: 1
+      })
+  });
   });
 
   $(document).on("click", ".back", function(e) {
