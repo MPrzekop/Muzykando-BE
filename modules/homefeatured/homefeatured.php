@@ -133,6 +133,7 @@ class HomeFeatured extends Module
 			// get products ids from mahout
 			$productIds = "1,2,3,4,5";
 			$productIds = explode($productIds);
+			echo($productIds);
 			$productCount = count($productIds);
 
 			// read product data from db
