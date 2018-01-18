@@ -125,7 +125,7 @@ $(document).ready(function() {
          userID: parseInt(document.cookie
              .split(" ")
              [document.cookie.split(" ").length - 1].split("=")[1]),
-              productID: parseInt(id_product),
+              itemID: parseInt(id_product),
           value: 1
       })
   });
