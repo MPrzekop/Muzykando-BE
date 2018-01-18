@@ -122,7 +122,7 @@ $(document).ready(function() {
       url: "http://172.20.83.77:8080/recommends",
       contentType:"application/json",
      data: JSON.stringify({
-         userID: parseInt(getCookie("customer_id")),
+         userID: parseInt(2),
               itemID: parseInt(id_product),
           value: 1
       })
