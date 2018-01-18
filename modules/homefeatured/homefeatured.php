@@ -118,10 +118,8 @@ class HomeFeatured extends Module
 	}
 	public function hookDisplayHomeTab($params)
 	{
-		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab'))){
+		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab')))
 			$this->_cacheProducts();
-			
-			}
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
 	public function hookDisplayHome($params)
@@ -132,16 +130,16 @@ class HomeFeatured extends Module
 		
 $id = Context::getContext()->customer->id;
 //echo "AA".$id;
-$recommendationsJson = file_get_contents("http://172.20.83.77:8080/recommends/user/$id", true);
+//$recommendationsJson = file_get_contents("http://bedockermaster3_drogex-mahout_1:9090/user/$id/recommendations", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
-$recommendationsArray = json_decode($recommendationsJson, true);
-$ids = "";
-if(count($recommendationsArray) > 0){
-foreach ($recommendationsArray as $key => $value) {
-  $ids .= $value['itemID'].",";
-}
-//$ids = "100,245,234,";
+//$recommendationsArray = json_decode($recommendationsJson, true);
+// $ids = "";
+// if(count($recommendationsArray) > 0){
+// foreach ($recommendationsArray as $key => $value) {
+//   $ids .= $value['itemID'].",";
+// }
+$ids = "1,2,3,";
 $ids = substr($ids, 0, -1);
 $ids2 = explode(',' , $ids);
 $recommendedProducts2 = array();
@@ -160,7 +158,7 @@ $recommendedProducts2 = array();
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 				)
 			);
-		}
+		//}
 }
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
