@@ -118,10 +118,8 @@ class HomeFeatured extends Module
 	}
 	public function hookDisplayHomeTab($params)
 	{
-		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab'))){
+		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab')))
 			$this->_cacheProducts();
-			
-			}
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
 	public function hookDisplayHome($params)
@@ -160,7 +158,7 @@ $recommendedProducts2 = array();
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 				)
 			);
-		}
+		//}
 }
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
