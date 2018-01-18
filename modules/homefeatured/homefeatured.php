@@ -128,38 +128,40 @@ class HomeFeatured extends Module
 	{
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
 		{
-			$userId = Context::getContext()->customer->id;
-
-			// get products ids from mahout
-			$productIds = "1,2,3,4,5";
-			$productIds = explode($productIds);
-			echo($productIds);
-			$productCount = count($productIds);
-
-			// read product data from db
-			$recommendedProductsData = Db::getInstance()->executeS('SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$productIds.')');
-
-			// prepare products for displaying
-			$recommendedProducts = array();
-
-			for($i = 0; $i < $productCount; $i++){
-				$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
-				$recommendedProducts[$i]['price_without_reduction'] = '';
-				$recommendedProducts[$i]['id_image'] = Product::getCover((int)$productIds[$i])['id_image'];
-				$recommendedProducts[$i]['link'] = Context::getContext()->link->
-					getProductLink((int)$productIds[$i], $recommendedProducts[$i]['link_rewrite'], 
-					$recommendedProducts[$i]['category'], $recommendedProducts[$i]['ean13']);
-			}
-
-			// assign products
-			$this->smarty->assign(
+		//	$this->_cacheProducts();
+		
+$id = Context::getContext()->customer->id;
+//echo "AA".$id;
+//$recommendationsJson = file_get_contents("http://bedockermaster3_drogex-mahout_1:9090/user/$id/recommendations", true);
+//$recommendationsJson = "";
+//echo $recommendationsJson;
+//$recommendationsArray = json_decode($recommendationsJson, true);
+// $ids = "";
+// if(count($recommendationsArray) > 0){
+// foreach ($recommendationsArray as $key => $value) {
+//   $ids .= $value['itemID'].",";
+// }
+$ids = "1,2,3,";
+$ids = substr($ids, 0, -1);
+$ids2 = explode(',' , $ids);
+$recommendedProducts2 = array();
+    $recommendedProducts = Db::getInstance()->executeS('SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$ids.')');
+	for($i = 0; $i < count($ids2); $i++){
+		$recommendedProducts2[$i] = (array)(new Product($ids2[$i], false, '1'));
+		$recommendedProducts2[$i]['price_without_reduction'] = '';
+		$recommendedProducts2[$i]['id_image'] = Product::getCover((int)$ids2[$i])['id_image'];
+		$recommendedProducts2[$i]['link'] = Context::getContext()->link->getProductLink((int)$ids2[$i], $recommendedProducts2[$i]['link_rewrite'], $recommendedProducts2[$i]['category'], $recommendedProducts2[$i]['ean13']);
+}
+//var_dump($recommendedProducts2);
+	$this->smarty->assign(
 				array(
-					'products' =>(object) $recommendedProducts,
+					'products' =>(object) $recommendedProducts2,
 					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
-					)
-				);
+				)
+			);
 		}
+}
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
 	public function hookDisplayHomeTabContent($params)
