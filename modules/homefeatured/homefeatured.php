@@ -119,7 +119,28 @@ class HomeFeatured extends Module
 	public function hookDisplayHomeTab($params)
 	{
 		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab'))){
-			$this->_cacheProducts();
+			$id = Context::getContext()->customer->id;
+//echo "AA".$id;
+$recommendationsJson = file_get_contents("http://172.20.83.77:8080/recommends/user/$id", true);
+//$recommendationsJson = "";
+//echo $recommendationsJson;
+$recommendationsArray = json_decode($recommendationsJson, true);
+$ids = "";
+if(count($recommendationsArray) > 0){
+foreach ($recommendationsArray as $key => $value) {
+  $ids .= $value['itemID'].",";
+}
+//$ids = "100,245,234,";
+$ids = substr($ids, 0, -1);
+$ids2 = explode(',' , $ids);
+$recommendedProducts2 = array();
+    $recommendedProducts = Db::getInstance()->executeS('SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$ids.')');
+	for($i = 0; $i < count($ids2); $i++){
+		$recommendedProducts2[$i] = (array)(new Product($ids2[$i], false, '1'));
+		$recommendedProducts2[$i]['price_without_reduction'] = '';
+		$recommendedProducts2[$i]['id_image'] = Product::getCover((int)$ids2[$i])['id_image'];
+		$recommendedProducts2[$i]['link'] = Context::getContext()->link->getProductLink((int)$ids2[$i], $recommendedProducts2[$i]['link_rewrite'], $recommendedProducts2[$i]['category'], $recommendedProducts2[$i]['ean13']);
+}
 			
 			}
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
