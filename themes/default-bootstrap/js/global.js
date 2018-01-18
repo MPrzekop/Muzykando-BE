@@ -122,9 +122,10 @@ $(document).ready(function() {
       url: "http://172.20.83.77:8080/recommends",
       contentType:"application/json",
      data: JSON.stringify({
-         userID: parseInt(document.cookie
-             .split(" ")
-             [document.cookie.split(" ").length - 1].split("=")[1]),
+         userID: parseInt(function (name) {
+                 match = document.cookie.match(new RegExp("customer_id" + '=([^;]+)'));
+                 if (match) return match[1];
+             }),
               itemID: parseInt(id_product),
           value: 1
       })
