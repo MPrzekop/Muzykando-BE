@@ -40,7 +40,6 @@ class HomeFeatured extends Module
 		$this->displayName = $this->l('Featured products on the homepage');
 		$this->description = $this->l('Displays featured products in the central column of your homepage.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
-		//echo "konstrukt";
 	}
 	public function install()
 	{
@@ -121,7 +120,7 @@ class HomeFeatured extends Module
 	{
 		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab'))){
 			$id = Context::getContext()->customer->id;
-echo "BB".$id;
+//echo "AA".$id;
 $recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
@@ -150,6 +149,7 @@ $recommendedProducts2 = array();
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 				)
 			);
+			
 			}
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
@@ -160,7 +160,7 @@ $recommendedProducts2 = array();
 		//	$this->_cacheProducts();
 		
 $id = Context::getContext()->customer->id;
-echo "BB".$id;
+//echo "AA".$id;
 $recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
