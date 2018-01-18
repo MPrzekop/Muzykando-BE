@@ -23,14 +23,11 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
-
 if (!defined('_PS_VERSION_'))
 	exit;
-
 class HomeFeatured extends Module
 {
 	protected static $cache_products;
-
 	public function __construct()
 	{
 		$this->name = 'homefeatured';
@@ -38,22 +35,18 @@ class HomeFeatured extends Module
 		$this->version = '1.8.1';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
-
 		$this->bootstrap = true;
 		parent::__construct();
-
 		$this->displayName = $this->l('Featured products on the homepage');
 		$this->description = $this->l('Displays featured products in the central column of your homepage.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
 	}
-
 	public function install()
 	{
 		$this->_clearCache('*');
 		Configuration::updateValue('HOME_FEATURED_NBR', 8);
 		Configuration::updateValue('HOME_FEATURED_CAT', (int)Context::getContext()->shop->getCategory());
 		Configuration::updateValue('HOME_FEATURED_RANDOMIZE', false);
-
 		if (!parent::install()
 			|| !$this->registerHook('header')
 			|| !$this->registerHook('addproduct')
@@ -64,17 +57,13 @@ class HomeFeatured extends Module
 			|| !$this->registerHook('displayHomeTabContent')
 		)
 			return false;
-
 		return true;
 	}
-
 	public function uninstall()
 	{
 		$this->_clearCache('*');
-
 		return parent::uninstall();
 	}
-
 	public function getContent()
 	{
 		$output = '';
@@ -84,11 +73,9 @@ class HomeFeatured extends Module
 			$nbr = Tools::getValue('HOME_FEATURED_NBR');
 			if (!Validate::isInt($nbr) || $nbr <= 0)
 			$errors[] = $this->l('The number of products is invalid. Please enter a positive number.');
-
 			$cat = Tools::getValue('HOME_FEATURED_CAT');
 			if (!Validate::isInt($cat) || $cat <= 0)
 				$errors[] = $this->l('The category ID is invalid. Please choose an existing category ID.');
-
 			$rand = Tools::getValue('HOME_FEATURED_RANDOMIZE');
 			if (!Validate::isBool($rand))
 				$errors[] = $this->l('Invalid value for the "randomize" flag.');
@@ -103,22 +90,18 @@ class HomeFeatured extends Module
 				$output = $this->displayConfirmation($this->l('Your settings have been updated.'));
 			}
 		}
-
 		return $output.$this->renderForm();
 	}
-
 	public function hookDisplayHeader($params)
 	{
 		$this->hookHeader($params);
 	}
-
 	public function hookHeader($params)
 	{
 		if (isset($this->context->controller->php_self) && $this->context->controller->php_self == 'index')
 			$this->context->controller->addCSS(_THEME_CSS_DIR_.'product_list.css');
 		$this->context->controller->addCSS(($this->_path).'css/homefeatured.css', 'all');
 	}
-
 	public function _cacheProducts()
 	{
 		if (!isset(HomeFeatured::$cache_products))
@@ -130,28 +113,24 @@ class HomeFeatured extends Module
 			else
 				HomeFeatured::$cache_products = $category->getProducts((int)Context::getContext()->language->id, 1, ($nb ? $nb : 8), 'position');
 		}
-
 		if (HomeFeatured::$cache_products === false || empty(HomeFeatured::$cache_products))
 			return false;
 	}
-
 	public function hookDisplayHomeTab($params)
 	{
 		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab')))
 			$this->_cacheProducts();
-
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
-
 	public function hookDisplayHome($params)
 	{
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
 		{
-					//	$this->_cacheProducts();
+		//	$this->_cacheProducts();
 		
 $id = Context::getContext()->customer->id;
 //echo "AA".$id;
-$recommendationsJson = file_get_contents("http://172.20.83.77:8080//recommends/user/$id", true);
+$recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
 $recommendationsArray = json_decode($recommendationsJson, true);
@@ -172,50 +151,42 @@ $recommendedProducts2 = array();
 		$recommendedProducts2[$i]['link'] = Context::getContext()->link->getProductLink((int)$ids2[$i], $recommendedProducts2[$i]['link_rewrite'], $recommendedProducts2[$i]['category'], $recommendedProducts2[$i]['ean13']);
 }
 //var_dump($recommendedProducts2);
-	
-			$this->smarty->assign(
+	$this->smarty->assign(
 				array(
-					'products' => HomeFeatured::$cache_products,
+					'products' =>(object) $recommendedProducts2,
 					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 				)
 			);
 		}
-
+}
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
-
 	public function hookDisplayHomeTabContent($params)
 	{
 		return $this->hookDisplayHome($params);
 	}
-
 	public function hookAddProduct($params)
 	{
 		$this->_clearCache('*');
 	}
-
 	public function hookUpdateProduct($params)
 	{
 		$this->_clearCache('*');
 	}
-
 	public function hookDeleteProduct($params)
 	{
 		$this->_clearCache('*');
 	}
-
 	public function hookCategoryUpdate($params)
 	{
 		$this->_clearCache('*');
 	}
-
 	public function _clearCache($template, $cache_id = NULL, $compile_id = NULL)
 	{
 		parent::_clearCache('homefeatured.tpl');
 		parent::_clearCache('tab.tpl', 'homefeatured-tab');
 	}
-
 	public function renderForm()
 	{
 		$fields_form = array(
@@ -265,7 +236,6 @@ $recommendedProducts2 = array();
 				)
 			),
 		);
-
 		$helper = new HelperForm();
 		$helper->show_toolbar = false;
 		$helper->table = $this->table;
@@ -283,10 +253,8 @@ $recommendedProducts2 = array();
 			'languages' => $this->context->controller->getLanguages(),
 			'id_language' => $this->context->language->id
 		);
-
 		return $helper->generateForm(array($fields_form));
 	}
-
 	public function getConfigFieldsValues()
 	{
 		return array(
