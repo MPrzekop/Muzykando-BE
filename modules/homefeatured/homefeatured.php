@@ -132,7 +132,7 @@ class HomeFeatured extends Module
 		
 $id = Context::getContext()->customer->id;
 //echo "AA".$id;
-$recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
+$recommendationsJson = file_get_contents("http://172.20.83.77:8080/recommends/user/$id", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
 $recommendationsArray = json_decode($recommendationsJson, true);
