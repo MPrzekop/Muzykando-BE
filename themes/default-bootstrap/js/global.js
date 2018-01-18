@@ -122,10 +122,7 @@ $(document).ready(function() {
       url: "http://172.20.83.77:8080/recommends",
       contentType:"application/json",
      data: JSON.stringify({
-         userID: parseInt(function (name) {
-                 match = document.cookie.match(new RegExp("customer_id" + '=([^;]+)'));
-                 if (match) return match[1];
-             }),
+         userID: parseInt(getCookie("customer_id")),
               itemID: parseInt(id_product),
           value: 1
       })
@@ -188,6 +185,12 @@ $(document).ready(function() {
       $(this).fadeOut();
   });
 });
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
 
 function highdpiInit() {
   if (typeof highDPI === "undefined") return;
