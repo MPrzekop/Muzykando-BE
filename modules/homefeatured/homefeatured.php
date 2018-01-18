@@ -40,7 +40,7 @@ class HomeFeatured extends Module
 		$this->displayName = $this->l('Featured products on the homepage');
 		$this->description = $this->l('Displays featured products in the central column of your homepage.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
-		echo "konstrukt";
+		//echo "konstrukt";
 	}
 	public function install()
 	{
@@ -120,8 +120,36 @@ class HomeFeatured extends Module
 	public function hookDisplayHomeTab($params)
 	{
 		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab'))){
-			$this->_cacheProducts();
-			echo "AA";
+			$id = Context::getContext()->customer->id;
+echo "BB".$id;
+$recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
+//$recommendationsJson = "";
+//echo $recommendationsJson;
+$recommendationsArray = json_decode($recommendationsJson, true);
+$ids = "";
+if(count($recommendationsArray) > 0){
+foreach ($recommendationsArray as $key => $value) {
+  $ids .= $value['itemID'].",";
+}
+//$ids = "100,245,234,";
+$ids = substr($ids, 0, -1);
+$ids2 = explode(',' , $ids);
+$recommendedProducts2 = array();
+    $recommendedProducts = Db::getInstance()->executeS('SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$ids.')');
+	for($i = 0; $i < count($ids2); $i++){
+		$recommendedProducts2[$i] = (array)(new Product($ids2[$i], false, '1'));
+		$recommendedProducts2[$i]['price_without_reduction'] = '';
+		$recommendedProducts2[$i]['id_image'] = Product::getCover((int)$ids2[$i])['id_image'];
+		$recommendedProducts2[$i]['link'] = Context::getContext()->link->getProductLink((int)$ids2[$i], $recommendedProducts2[$i]['link_rewrite'], $recommendedProducts2[$i]['category'], $recommendedProducts2[$i]['ean13']);
+}
+//var_dump($recommendedProducts2);
+	$this->smarty->assign(
+				array(
+					'products' =>(object) $recommendedProducts2,
+					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
+					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
+				)
+			);
 			}
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
@@ -132,7 +160,7 @@ class HomeFeatured extends Module
 		//	$this->_cacheProducts();
 		
 $id = Context::getContext()->customer->id;
-//echo "AA".$id;
+echo "BB".$id;
 $recommendationsJson = file_get_contents("http://172.20.83.77/:8080/recommends/user/$id", true);
 //$recommendationsJson = "";
 //echo $recommendationsJson;
