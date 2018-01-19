@@ -132,12 +132,12 @@ class HomeFeatured extends Module
 
 		//reading data from mahout
 		// $responseJson = json_decode(file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true));
-		// $productIds = array();
+		$productIds = array();
 
 		$responseJson = json_decode('[{"itemID":282,"value":0.0},{"itemID":283,"value":0.0},{"itemID":284,"value":0.0},{"itemID":291,"value":0.0}]');
-		
+
 		foreach ($responseJson as $item) {
-			$productIds[] = $item['itemID'];
+			$productIds[] = $item->itemID;
 		}
 
 		// preparing array of products
