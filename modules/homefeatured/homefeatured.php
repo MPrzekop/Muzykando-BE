@@ -124,6 +124,8 @@ class HomeFeatured extends Module
 	}
 	public function hookDisplayHome($params)
 	{
+		$this->_clearCache('*');
+		
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
 		{	}	
 		$id = Context::getContext()->customer->id;
