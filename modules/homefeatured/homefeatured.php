@@ -136,8 +136,6 @@ class HomeFeatured extends Module
 
 		// preparing array of products
 		$recommendedProducts = array();
-		$ProductData = Db::getInstance()->executeS(
-			'SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$idString.')');
 		
 	for($i = 0; $i < count($productIds); $i++){
 		$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
