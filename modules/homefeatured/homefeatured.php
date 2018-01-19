@@ -125,18 +125,19 @@ class HomeFeatured extends Module
 	public function hookDisplayHome($params)
 	{
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
-		{
-		//	$this->_cacheProducts();
-		
+		{		
 		$id = Context::getContext()->customer->id;
 
 		// reading data from mahout
-		$idString = "1,2,3";
-		$productIds = explode(',' , $idString);
+		$responseJson = json_decode(file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true));
+		$productIds = array();
+
+		foreach ($responseJson as $item) {
+			$productIds[] = $item['itemID'];
+		}
 
 		// preparing array of products
-		$recommendedProducts = array();
-		
+		$recommendedProducts = array();	
 	for($i = 0; $i < count($productIds); $i++){
 		$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
 		$recommendedProducts[$i]['price_without_reduction'] = '';
