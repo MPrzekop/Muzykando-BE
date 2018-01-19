@@ -137,7 +137,7 @@ class HomeFeatured extends Module
 		// foreach ($responseJson as $item) {
 		// 	$productIds[] = $item['itemID'];
 		// }
-		$productIds = array(12, 14, 16);
+		$productIds = array(31, 37, 43, 50, 23);
 
 		// preparing array of products
 		$recommendedProducts = array();	
