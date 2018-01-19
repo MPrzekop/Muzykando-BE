@@ -133,7 +133,7 @@ class HomeFeatured extends Module
 		$productIds = array();
 
 		foreach ($responseJson as $item) {
-			$productIds[] = $item['itemID'];
+			$productIds[] = $item->itemID;
 		}
 
 		// preparing array of products
