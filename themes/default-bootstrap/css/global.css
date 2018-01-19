@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -8568,4 +8568,7 @@ div.star.star_hover:after {
 .pointer-box {
   cursor: pointer; }
 
+.ajax_add_to_cart_button{
+    display: none !important;
+}
 /*# sourceMappingURL=global.css.map */
