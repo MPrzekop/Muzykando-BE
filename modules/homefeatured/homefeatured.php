@@ -125,10 +125,33 @@ class HomeFeatured extends Module
 	public function hookDisplayHome($params)
 	{
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
-		{
-		//	$this->_cacheProducts();
+		{ 
+			$id = Context::getContext()->customer->id;
+
+			$productIds = array(1,2,3);
+			
+			$recommendedProducts = array();		
+			for($i = 0; $i < count($productIds); $i++){
+				$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
+				$recommendedProducts[$i]['price_without_reduction'] = '';
+				$recommendedProducts[$i]['id_image'] = Product::getCover((int)$productIds[$i])['id_image'];
+				$recommendedProducts[$i]['link'] = Context::getContext()->link->getProductLink(
+					(int)$productIds[$i], 
+					$recommendedProducts[$i]['link_rewrite'], 
+					$recommendedProducts[$i]['category'], 
+					$recommendedProducts[$i]['ean13']);
+			}
+
+			$this->smarty->assign(
+				array(
+					'products' =>(object) $recommendedProducts,
+					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
+					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
+				)
+			);
+		}
+	}
 		
-		$id = Context::getContext()->customer->id;
 
 		// reading data from mahout
 		// $response = file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true);
@@ -138,30 +161,6 @@ class HomeFeatured extends Module
 		// 	$productIds[] = $product['itemID'];
 		// }
 
-		$productIds = array(1,2,3);
-
-		// preparing array of products
-		$recommendedProducts = array();		
-		for($i = 0; $i < count($productIds); $i++){
-			$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
-			$recommendedProducts[$i]['price_without_reduction'] = '';
-			$recommendedProducts[$i]['id_image'] = Product::getCover((int)$productIds[$i])['id_image'];
-			$recommendedProducts[$i]['link'] = Context::getContext()->link->getProductLink(
-				(int)$productIds[$i], 
-				$recommendedProducts[$i]['link_rewrite'], 
-				$recommendedProducts[$i]['category'], 
-				$recommendedProducts[$i]['ean13']);
-		}
-		// assigning products to display
-		$this->smarty->assign(
-					array(
-						'products' =>(object) $recommendedProducts,
-						'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
-						'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
-					)
-				);
-	}
-}
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
 	public function hookDisplayHomeTabContent($params)
