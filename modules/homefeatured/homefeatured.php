@@ -124,8 +124,8 @@ class HomeFeatured extends Module
 	}
 	public function hookDisplayHome($params)
 	{
-		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
-		{	}	
+		$this->_clearCache('*');
+		
 		$id = Context::getContext()->customer->id;
 
 		//reading data from mahout
