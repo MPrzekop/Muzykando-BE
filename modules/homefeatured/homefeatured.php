@@ -134,10 +134,11 @@ class HomeFeatured extends Module
 		// $responseJson = json_decode(file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true));
 		// $productIds = array();
 
-		// foreach ($responseJson as $item) {
-		// 	$productIds[] = $item['itemID'];
-		// }
-		$productIds = array(31, 37, 43, 50, 23);
+		$responseJson = json_decode('[{"itemID":282,"value":0.0},{"itemID":283,"value":0.0},{"itemID":284,"value":0.0},{"itemID":291,"value":0.0}]');
+		
+		foreach ($responseJson as $item) {
+			$productIds[] = $item['itemID'];
+		}
 
 		// preparing array of products
 		$recommendedProducts = array();	
