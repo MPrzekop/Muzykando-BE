@@ -128,15 +128,14 @@ class HomeFeatured extends Module
 		{	}	
 		$id = Context::getContext()->customer->id;
 
-		// reading data from mahout
-		// $responseJson = json_decode(file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true));
-		// $productIds = array();
+		//reading data from mahout
+		$responseJson = json_decode(file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true));
+		$productIds = array();
 
-		// foreach ($responseJson as $item) {
-		// 	$productIds[] = $item['itemID'];
-		// }
+		foreach ($responseJson as $item) {
+			$productIds[] = $item['itemID'];
+		}
 
-		$productIds = array(5,6,7);
 		// preparing array of products
 		$recommendedProducts = array();	
 	for($i = 0; $i < count($productIds); $i++){
