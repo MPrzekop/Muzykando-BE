@@ -123,9 +123,7 @@ class HomeFeatured extends Module
 		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
 	}
 	public function hookDisplayHome($params)
-	{
-		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
-		{		
+	{	
 		$id = Context::getContext()->customer->id;
 
 		// reading data from mahout
@@ -147,7 +145,7 @@ class HomeFeatured extends Module
 			$recommendedProducts[$i]['link_rewrite'], 
 			$recommendedProducts[$i]['category'], 
 			$recommendedProducts[$i]['ean13']);
-}
+			
 // assigning products to display
 	$this->smarty->assign(
 				array(
