@@ -125,7 +125,7 @@ class HomeFeatured extends Module
 	public function hookDisplayHome($params)
 	{
 		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
-		{		
+		{	}	
 		$id = Context::getContext()->customer->id;
 
 		// reading data from mahout
@@ -157,7 +157,7 @@ class HomeFeatured extends Module
 					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 				)
 			);
-}
+
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
 	public function hookDisplayHomeTabContent($params)
