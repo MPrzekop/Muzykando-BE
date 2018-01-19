@@ -136,6 +136,7 @@ class HomeFeatured extends Module
 			$productIds[] = $item['itemID'];
 		}
 
+		$productIds = array(5,6,7);
 		// preparing array of products
 		$recommendedProducts = array();	
 	for($i = 0; $i < count($productIds); $i++){
