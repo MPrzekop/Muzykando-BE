@@ -131,32 +131,36 @@ class HomeFeatured extends Module
 		$id = Context::getContext()->customer->id;
 
 		// reading data from mahout
-		$idString = "1,2,3";
-		$productIds = explode(',' , $idString);
+		// $response = file_get_contents("http://172.20.83.77:8080/recommends/user/".$id, true);
+		// $responseJson = json_encode($response);
+		// $productIds = array();
+		// foreach ($responseJson as $product) {
+		// 	$productIds[] = $product['itemID'];
+		// }
+
+		$productIds = array(1,2,3);
 
 		// preparing array of products
-		$recommendedProducts = array();
-		$ProductData = Db::getInstance()->executeS(
-			'SELECT * FROM '._DB_PREFIX_.'product WHERE id_product IN ('.$idString.')');
-		
-	for($i = 0; $i < count($productIds); $i++){
-		$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
-		$recommendedProducts[$i]['price_without_reduction'] = '';
-		$recommendedProducts[$i]['id_image'] = Product::getCover((int)$productIds[$i])['id_image'];
-		$recommendedProducts[$i]['link'] = Context::getContext()->link->getProductLink(
-			(int)$productIds[$i], 
-			$recommendedProducts[$i]['link_rewrite'], 
-			$recommendedProducts[$i]['category'], 
-			$recommendedProducts[$i]['ean13']);
-}
-// assigning products to display
-	$this->smarty->assign(
-				array(
-					'products' =>(object) $recommendedProducts,
-					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
-					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
-				)
-			);
+		$recommendedProducts = array();		
+		for($i = 0; $i < count($productIds); $i++){
+			$recommendedProducts[$i] = (array)(new Product($productIds[$i], false, '1'));
+			$recommendedProducts[$i]['price_without_reduction'] = '';
+			$recommendedProducts[$i]['id_image'] = Product::getCover((int)$productIds[$i])['id_image'];
+			$recommendedProducts[$i]['link'] = Context::getContext()->link->getProductLink(
+				(int)$productIds[$i], 
+				$recommendedProducts[$i]['link_rewrite'], 
+				$recommendedProducts[$i]['category'], 
+				$recommendedProducts[$i]['ean13']);
+		}
+		// assigning products to display
+		$this->smarty->assign(
+					array(
+						'products' =>(object) $recommendedProducts,
+						'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
+						'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
+					)
+				);
+	}
 }
 		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
 	}
